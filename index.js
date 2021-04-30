@@ -6,7 +6,7 @@ const ytdl = require('ytdl-core-discord');
 const prefix = "+"
 const ServerId = '825093171305906177'
 const RoleChannelId = '835881314091008010'
-const RolesMessageId = '835886522435633162'
+const RolesMessageId = '837767220310442038'
 
 
 const ping = require('./comandos/ping.js')
@@ -81,13 +81,13 @@ client.on('message', async msg => {
 client.on("messageReactionAdd", async(reaction, user, message) => {
 
     // Vendo se a reação é parcial...
-    reaction.users.remove(user.id);
     if (reaction.message.partial) await reaction.message.fetch();
     if (user.bot) return
     if (reaction.message.id == RolesMessageId) {
 
         if (reaction.emoji.name === '👽' || reaction.emoji.name === '👾') GiveRole(user, reaction.emoji.name, await client.guilds.cache.get(ServerId))
-        return
+        return reaction.users.remove(user.id);
+
 
 
     }
